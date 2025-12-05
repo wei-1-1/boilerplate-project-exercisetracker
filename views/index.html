@@ -18,8 +18,8 @@
       </form>
       <form action="/api/users/:_id/exercises" id="exercise-form" method="post">
         <h2>Add exercises</h2>
-        <p><code>POST /api/users/:_id/exercises</code></p>
-        <input id="uid" type="text" name=":_id" placeholder=":_id" />
+        <p><code>POST /api/users/_id/exercises</code></p>
+        <input id="uid" type="text" name="_id" placeholder=":_id" /><!--将 name=:_id 修改为 name=_id，我看示例的查询 api/users/id 也没有这个冒号，我还没有理解这里的差异-->
         <input id="desc" type="text" name="description" placeholder="description*" />
         <input id="dur" type="text" name="duration" placeholder="duration* (mins.)" />
         <input id="date" type="text" name="date" placeholder="date (yyyy-mm-dd)" />
