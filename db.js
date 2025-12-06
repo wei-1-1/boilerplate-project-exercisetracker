@@ -57,7 +57,7 @@ async function checkOrCreateUser(username) {
         { upsert: true, returnDocument: 'after' }
     )
 
-    // 这里的 result 可能包含在 value 属性中，直接以 result.value._id 访问会报错
+    // 很奇怪，直接以 result.value._id 访问会报错
     const userDocument = result.value || result;
     if (!userDocument) {
         throw new Error("Failed to create or retrieve user");
@@ -68,7 +68,7 @@ async function checkOrCreateUser(username) {
 async function addExerciseRecord(_id, description, duration, date) {
     const usersCollection = db.collection("users-exercises")
 
-    // 问题同上
+    // 问题前面注释掉的代码
     //另外，查询应该使用 ObjectId，因为我们传入的 _id 是字符串类型，并非 MongoDB 的 ObjectId 对象
     /*
     const user = await usersCollection.findOne({_id: _id});
@@ -163,7 +163,7 @@ async function getRecordsWithLimits(_id, from, to, limit) {
 
     if (from) {
         const fromDate = new Date(from).getTime();
-        //在保留了花括号的情况下没有 return 关键字，🧠 离线了……
+        //在保留了花括号的情况下没有 return 关键字，让我调试了好几次，🧠 离线了……
         filteredLog = filteredLog.filter(record => new Date(record.date).getTime() >= fromDate);
         //console.log("filteredLog after from filter:", filteredLog);
     }
